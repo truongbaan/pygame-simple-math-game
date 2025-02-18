@@ -12,13 +12,9 @@ RED = (255,0,0)
 pygame.init()
 pygame.display.set_caption("Math game")
 
-# Get screen size
-info = pygame.display.Info()
-screen_width, screen_height = info.current_w, info.current_h
-
-# Adjust window size
-window_width = int(screen_width * 0.9)
-window_height = int(screen_height * 0.8)
+# window size
+window_width = 1382
+window_height = 691
 
 # Set up the display
 win = pygame.display.set_mode((window_width, window_height))
@@ -97,14 +93,16 @@ def create_buttons(x, y, width, height, amount, rows, correct_answer):
 
 # Create the initial question and buttons
 result, question_text = make_question()
-buttons = create_buttons(int(window_width / 14), int(screen_height / 4), button_width, button_length, 5, 4, result)
+buttons = create_buttons(int(window_width / 14), int(window_height / 4), button_width, button_length, 5, 4, result)
 
 start_button = Button( int(window_width / 2 - button_width / 2), int(window_height * 3 / 4), button_width, button_length, "Start game")
 
 def welcome_screen():
     win.fill(WHITE)
-    intro_text = "Welcome to the math game\nIn this game, you will need to calculate the correct answer in limited time.\nThere is only 3 types of math symbols in here\n"
-    intro_text += "Press start when you're ready"
+    intro_text = """    Welcome to the math game
+    In this game, you will need to calculate the correct answer in limited time.
+    There is only 3 types of math symbols in here ('+', '-', 'x')
+    Press start when you're ready"""
     intro_surface = font.render(intro_text, True, BLACK)
     win.blit(intro_surface, (int(window_width / 2 - intro_surface.get_width() / 2), int(window_height / 5)))
     
@@ -152,7 +150,7 @@ clock = pygame.time.Clock()
 
 def restart_question():
     result, question_text = make_question()
-    buttons = create_buttons(int(window_width / 14), int(screen_height / 4), button_width, button_length, 5, 4, result)
+    buttons = create_buttons(int(window_width / 14), int(window_height / 4), button_width, button_length, 5, 4, result)
     start_ticks = pygame.time.get_ticks()  # Reset timer
     return result, question_text, buttons, start_ticks
 
