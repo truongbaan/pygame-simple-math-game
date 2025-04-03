@@ -51,5 +51,5 @@ To run this project on your local machine, follow these steps:
 This project was created for learning purposes. Feel free to fork and modify it for fun!
 
 ## License  
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
