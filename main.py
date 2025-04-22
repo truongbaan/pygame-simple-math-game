@@ -96,24 +96,36 @@ result, question_text = make_question()
 buttons = create_buttons(int(window_width / 14), int(window_height / 4), button_width, button_length, 5, 4, result)
 
 start_button = Button( int(window_width / 2 - button_width / 2), int(window_height * 3 / 4), button_width, button_length, "Start game")
+line_spacing = font.get_linesize()
 
 def welcome_screen():
     win.fill(WHITE)
+
     intro_text = """    Welcome to the math game
     In this game, you will need to calculate the correct answer in limited time.
     There is only 3 types of math symbols in here ('+', '-', 'x')
     Press start when you're ready"""
-    intro_surface = font.render(intro_text, True, BLACK)
-    win.blit(intro_surface, (int(window_width / 2 - intro_surface.get_width() / 2), int(window_height / 5)))
+
+    y = 100
+
+    # render and blit each line
+    for line in intro_text.splitlines():
+        # strip() will remove any leading/trailing whitespace if you want
+        intro_surface = font.render(line, True, BLACK)
+        win.blit(intro_surface, (int(window_width / 2 - intro_surface.get_width() / 2),y))
+        y += line_spacing
     
     start_button.draw(win)
     
 def lost_screen():
     win.fill(WHITE)
-    text = "Congratulation, you have lost!\nPress Q to restart the game"
-    text_surface = font.render(text, True, BLACK)
+    text = """Congratulation, you have lost!
+    Press Q to restart the game"""
+    for index, line in enumerate(text.splitlines()):
+        text_surface = font.render(line, True, BLACK)
+        win.blit(text_surface, (int(window_width / 2 - text_surface.get_width() / 2), int(window_height / 2) + line_spacing * (index-1)))
+        
     score = font.render(f"Your score: {temp_score}", True, BLACK)
-    win.blit(text_surface, (int(window_width / 2 - text_surface.get_width() / 2), int(window_height / 2)))
     win.blit(score, (int(window_width / 2 - score.get_width() / 2), int(window_height / 2) + font_size * 3))
     
 rect_x = 50
@@ -127,7 +139,7 @@ def ReDrawWindow():
         welcome_screen()
     elif screen_number == 2:
         win.fill(WHITE)
-        question_text_display = "Question: " + question_text + "\nScore: " + f"{diff}"
+        question_text_display = "Question: " + question_text + "    Score: " + f"{diff}"
         text_surface = font.render(question_text_display, True, BLACK)
         win.blit(text_surface, (int(window_width / 2 - text_surface.get_width() / 2), int(window_height / 10)))
         color = BLACK
