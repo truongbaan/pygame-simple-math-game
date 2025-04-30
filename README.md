@@ -30,8 +30,8 @@ To run this project on your local machine, follow these steps:
 3. **Clone the Repository:**  
    - Use Git to clone the project repository:  
      ```bash
-     git clone <your-repo-link>
-     cd <your-repo-name>
+     git clone https://github.com/truongbaan/pygame-simple-math-game.git
+     cd pygame-simple-math-game
      ```  
 
 4. **Run the Program:**  
